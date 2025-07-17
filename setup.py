@@ -5,13 +5,26 @@ import subprocess
 import importlib.util
 
 
-DISTNAME = 'nimfa'
-MAINTAINER = 'Marinka Zitnik'
-MAINTAINER_EMAIL = 'marinka@cs.stanford.edu'
+# DISTNAME = 'nimfa'
+# MAINTAINER = 'Marinka Zitnik'
+# MAINTAINER_EMAIL = 'marinka@cs.stanford.edu'
+# DESCRIPTION = 'A Python module for nonnegative matrix factorization'
+# LONG_DESCRIPTION = open('README.md').read()
+# URL = 'http://nimfa.biolab.si'
+# DOWNLOAD_URL = 'http://github.com/marinkaz/nimfa'
+# KEYWORDS = ['matrix factorization', 'nonnegative matrix factorization',
+#             'bioinformatics', 'data mining', 'machine learning']
+# LICENSE = 'BSD'
+# VERSION = '1.4.0'
+# ISRELEASED = True
+
+DISTNAME = 'nimfa2'
+MAINTAINER = 'Ben'
+MAINTAINER_EMAIL = 'Ben'
 DESCRIPTION = 'A Python module for nonnegative matrix factorization'
 LONG_DESCRIPTION = open('README.md').read()
 URL = 'http://nimfa.biolab.si'
-DOWNLOAD_URL = 'http://github.com/marinkaz/nimfa'
+DOWNLOAD_URL = 'https://github.com/putskan/nimfa2set'
 KEYWORDS = ['matrix factorization', 'nonnegative matrix factorization',
             'bioinformatics', 'data mining', 'machine learning']
 LICENSE = 'BSD'
