@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import setup, find_packages
 import subprocess
-import imp
+import importlib.util
 
 
 DISTNAME = 'nimfa'
