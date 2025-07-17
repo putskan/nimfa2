@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# nimfa - A Python Library for Nonnegative Matrix Factorization Techniques documentation build configuration file, created by
+# nimfa2 - A Python Library for Nonnegative Matrix Factorization Techniques documentation build configuration file, created by
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -112,7 +112,7 @@ html_sidebars = {
 # documentation.
 html_theme_options = {
     'github_user': 'marinkaz',
-    'github_repo': 'nimfa',
+    'github_repo': 'nimfa2',
     'github_button': True,
     'github_banner': True,
     'sidebar_width': '250px',
@@ -184,7 +184,7 @@ html_show_copyright = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'nimfa-APythonLibraryforNonnegativeMatrixFactorizationdoc'
+htmlhelp_basename = 'nimfa2-APythonLibraryforNonnegativeMatrixFactorizationdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -198,7 +198,7 @@ htmlhelp_basename = 'nimfa-APythonLibraryforNonnegativeMatrixFactorizationdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'nimfa-APythonLibraryforNonnegativeMatrixFactorization.tex', 'nimfa - A Python Library for Nonnegative Matrix Factorization',
+  ('index', 'nimfa2-APythonLibraryforNonnegativeMatrixFactorization.tex', 'nimfa2 - A Python Library for Nonnegative Matrix Factorization',
    'Marinka Zitnik', 'manual'),
 ]
 
@@ -231,7 +231,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'nimfa-APythonLibraryforNonnegativeMatrixFactorization', 'nimfa - A Python Library for Nonnegative Matrix Factorization',
+    ('index', 'nimfa2-APythonLibraryforNonnegativeMatrixFactorization', 'nimfa2 - A Python Library for Nonnegative Matrix Factorization',
      ['Marinka Zitnik'], 1)
 ]
 

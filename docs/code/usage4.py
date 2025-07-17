@@ -1,4 +1,4 @@
-import nimfa
+import nimfa2
 
 import numpy as np
 
@@ -11,7 +11,7 @@ def init_info(model):
     print('Initialized  mixture matrix:\n%s' % model.coef())
 
 # Callback is called after initialization and prior to factorization in each run
-icm = nimfa.Icm(V, seed='random_c', max_iter=10, rank=3, callback_init=init_info)
+icm = nimfa2.Icm(V, seed='random_c', max_iter=10, rank=3, callback_init=init_info)
 icm_fit = icm()
 
 W = icm_fit.basis()

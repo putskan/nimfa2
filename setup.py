@@ -5,7 +5,7 @@ import subprocess
 import importlib.util
 
 
-# DISTNAME = 'nimfa'
+# DISTNAME = 'nimfa2'
 # MAINTAINER = 'Marinka Zitnik'
 # MAINTAINER_EMAIL = 'marinka@cs.stanford.edu'
 # DESCRIPTION = 'A Python module for nonnegative matrix factorization'
@@ -101,9 +101,11 @@ if not release:
     FULLVERSION = VERSION
     if os.path.exists('.git'):
         GIT_REVISION = git_version()
-    elif os.path.exists('nimfa/version.py'):
+    elif os.path.exists('nimfa2/version.py'):
         # must be a source distribution, use existing version file
-        version = imp.load_source('nimfa.version', 'nimfa/version.py')
+        spec = importlib.util.spec_from_file_location("nimfa2.version", "nimfa2/version.py")
+        version = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(version)
         GIT_REVISION = version.git_revision
     else:
         GIT_REVISION = 'Unknown'

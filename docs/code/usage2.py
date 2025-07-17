@@ -1,11 +1,11 @@
 import numpy as np
 
-import nimfa
+import nimfa2
 
 V = np.array([[1, 2, 3], [4, 5, 6], [6, 7, 8]])
 print('Target:\n%s' % V)
 
-lsnmf = nimfa.Lsnmf(V, max_iter=10, rank=3)
+lsnmf = nimfa2.Lsnmf(V, max_iter=10, rank=3)
 lsnmf_fit = lsnmf()
 
 W = lsnmf_fit.basis()

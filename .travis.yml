@@ -31,15 +31,15 @@ services:
   - xvfb
 
 before_script:
-  - wget http://files.grouplens.org/datasets/movielens/ml-100k.zip -P nimfa/datasets/MovieLens/
-  - unzip -j nimfa/datasets/MovieLens/ml-100k.zip -d  nimfa/datasets/MovieLens/
-  - wget http://www.ai.mit.edu/courses/6.899/lectures/faces.tar.gz -P nimfa/datasets/CBCL_faces/
-  - tar zxvf nimfa/datasets/CBCL_faces/faces.tar.gz -C nimfa/datasets/CBCL_faces/
-  - tar zxvf nimfa/datasets/CBCL_faces/face.train.tar.gz -C nimfa/datasets/CBCL_faces/
-  - mv nimfa/datasets/CBCL_faces/train/face/ nimfa/datasets/CBCL_faces/
+  - wget http://files.grouplens.org/datasets/movielens/ml-100k.zip -P nimfa2/datasets/MovieLens/
+  - unzip -j nimfa2/datasets/MovieLens/ml-100k.zip -d  nimfa2/datasets/MovieLens/
+  - wget http://www.ai.mit.edu/courses/6.899/lectures/faces.tar.gz -P nimfa2/datasets/CBCL_faces/
+  - tar zxvf nimfa2/datasets/CBCL_faces/faces.tar.gz -C nimfa2/datasets/CBCL_faces/
+  - tar zxvf nimfa2/datasets/CBCL_faces/face.train.tar.gz -C nimfa2/datasets/CBCL_faces/
+  - mv nimfa2/datasets/CBCL_faces/train/face/ nimfa2/datasets/CBCL_faces/
 
 script:
-  - py.test --cov=nimfa
+  - py.test --cov=nimfa2
 
 after_success:
   - coveralls
@@ -55,5 +55,5 @@ after_success:
 #  on:
 #    tags: true
 #    branch: master
-#    repo: YOURGITHUBLOGIN/nimfa
+#    repo: YOURGITHUBLOGIN/nimfa2
 #    condition: "$TRAVIS_PYTHON_VERSION == 2.7 && $TRAVIS_TAG =~ ^v[0-9]*[.][.0-9]*"

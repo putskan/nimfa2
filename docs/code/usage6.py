@@ -1,6 +1,6 @@
 import numpy as np
 
-import nimfa
+import nimfa2
 
 V = np.random.rand(30, 20)
 
@@ -8,7 +8,7 @@ init_W = np.random.rand(30, 4)
 init_H = np.random.rand(4, 20)
 
 # Fixed initialization of latent matrices
-nmf = nimfa.Nmf(V, seed="fixed", W=init_W, H=init_H, rank=4)
+nmf = nimfa2.Nmf(V, seed="fixed", W=init_W, H=init_H, rank=4)
 nmf_fit = nmf()
 
 print("Euclidean distance: %5.3f" % nmf_fit.distance(metric="euclidean"))

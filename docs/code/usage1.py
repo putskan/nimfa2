@@ -1,12 +1,12 @@
 import numpy as np
 import scipy.sparse as spr
 
-import nimfa
+import nimfa2
 
 V = spr.csr_matrix([[1, 0, 2, 4], [0, 0, 6, 3], [4, 0, 5, 6]])
 print('Target:\n%s' % V.todense())
 
-nmf = nimfa.Nmf(V, max_iter=200, rank=2, update='euclidean', objective='fro')
+nmf = nimfa2.Nmf(V, max_iter=200, rank=2, update='euclidean', objective='fro')
 nmf_fit = nmf()
 
 W = nmf_fit.basis()
