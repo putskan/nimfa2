@@ -24,7 +24,7 @@ MAINTAINER_EMAIL = 'Ben'
 DESCRIPTION = 'A Python module for nonnegative matrix factorization'
 LONG_DESCRIPTION = open('README.md').read()
 URL = 'http://nimfa.biolab.si'
-DOWNLOAD_URL = 'https://github.com/putskan/nimfa2set'
+DOWNLOAD_URL = 'https://github.com/putskan/nimfa2'
 KEYWORDS = ['matrix factorization', 'nonnegative matrix factorization',
             'bioinformatics', 'data mining', 'machine learning']
 LICENSE = 'BSD'
@@ -84,7 +84,7 @@ def git_version():
     return GIT_REVISION
 
 
-def write_version_py(filename='nimfa/version.py'):
+def write_version_py(filename='nimfa2/version.py'):
     # Copied from numpy setup.py
     cnt = """
 # THIS FILE IS GENERATED FROM NIMFA SETUP.PY
@@ -137,7 +137,7 @@ def setup_package():
         keywords=KEYWORDS,
         install_requires=INSTALL_REQUIRES,
         packages=find_packages(),
-        package_dir={DISTNAME: './nimfa'},
+        package_dir={DISTNAME: './nimfa2'},
         package_data={DISTNAME: get_package_data('datasets')},
         license=LICENSE,
         long_description_content_type='text/markdown',
