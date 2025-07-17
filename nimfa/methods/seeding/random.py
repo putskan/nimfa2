@@ -83,7 +83,7 @@ class Random(object):
         :param dim2: Dimension along second axis.
         :type dim2: `int`
         """
-        return np.mat(self.prng.uniform(0, self.max, (dim1, dim2)))
+        return np.asarray(self.prng.uniform(0, self.max, (dim1, dim2)))
 
     def __repr__(self):
         return "random.Random()"

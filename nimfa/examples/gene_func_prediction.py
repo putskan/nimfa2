@@ -162,8 +162,8 @@ def transform_data(path, include_meta=False):
             if line_type == "@DATA":
                 section = 'd'
                 idxs = set(range(idx)).intersection(used_idx)
-                attr_data = np.mat(np.zeros((1e4, len(attr2idx))))
-                class_data = np.mat(np.zeros((1e4, len(class2idx))))
+                attr_data = np.asarray(np.zeros((1e4, len(attr2idx))))
+                class_data = np.asarray(np.zeros((1e4, len(class2idx))))
         elif section == 'd':
             d, _, comment = line.strip().partition("%")
             values = d.split(",")
@@ -287,10 +287,10 @@ def compute_correlations(train, test):
     # alternative, it is time consuming - can be used for partial evaluation
     """corrs = {}
     for i in xrange(test['W'].shape[0]):
-        corrs.setdefault(i, np.mat(np.zeros((train['W'].shape[0], 1))))
+        corrs.setdefault(i, np.asarray(np.zeros((train['W'].shape[0], 1))))
         for j in xrange(train['W'].shape[0]):
             corrs[i][j, 0] = _corr(test['W'][i, :], train['W'][j, :])"""
-    return np.mat(corrs)
+    return np.asarray(corrs)
 
 
 def _corr(x, y):

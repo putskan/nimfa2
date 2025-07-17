@@ -303,7 +303,7 @@ class Nmf(nmf_std.Nmf_std):
         cons = elop(mat1, mat2, eq)
         if not hasattr(self, 'consold'):
             self.cons = cons
-            self.consold = np.mat(np.logical_not(cons))
+            self.consold = np.asarray(np.logical_not(cons))
         else:
             self.consold = self.cons
             self.cons = cons

@@ -318,7 +318,7 @@ def norm_axis(X, p=None, axis=None):
     if sp.isspmatrix(X):
         return sla.norm(X, ord=p, axis=axis)
     else:
-        n = nla.norm(np.mat(X), ord=p, axis=axis)
+        n = nla.norm(np.asarray(X), ord=p, axis=axis)
         if axis is None:
             return n
         else:

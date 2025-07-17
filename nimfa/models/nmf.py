@@ -185,7 +185,7 @@ class Nmf(object):
         if sp.isspmatrix(conn):
             return conn.__class__(conn, dtype='d')
         else:
-            return np.mat(conn, dtype='d')
+            return np.asarray(conn, dtype='d')
 
     def consensus(self, idx=None):
         """
@@ -204,7 +204,7 @@ class Nmf(object):
             if sp.isspmatrix(V):
                 cons = V.__class__((V.shape[1], V.shape[1]), dtype=V.dtype)
             else:
-                cons = np.mat(np.zeros((V.shape[1], V.shape[1])))
+                cons = np.asarray(np.zeros((V.shape[1], V.shape[1])))
             for i in range(self.n_run):
                 cons += self.connectivity(
                     H=self.tracker.get_factor(i).H, idx=idx)

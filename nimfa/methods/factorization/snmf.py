@@ -183,8 +183,8 @@ class Snmf(nmf_std.Nmf_std):
             if sp.isspmatrix(self.H):
                 self.H = self.H.tolil()
             iter = 0
-            self.idx_w_old = np.mat(np.zeros((self.V.shape[0], 1)))
-            self.idx_h_old = np.mat(np.zeros((1, self.V.shape[1])))
+            self.idx_w_old = np.asarray(np.zeros((self.V.shape[0], 1)))
+            self.idx_h_old = np.asarray(np.zeros((1, self.V.shape[1])))
             c_obj = sys.float_info.max
             best_obj = c_obj if run == 0 else best_obj
             # count the number of convergence checks that column clusters and
@@ -200,7 +200,7 @@ class Snmf(nmf_std.Nmf_std):
                     sp.eye(self.rank, self.rank, format='lil')
             else:
                 self.beta_vec = sqrt(self.beta) * np.ones((1, self.rank))
-                self.I_k = self.eta * np.mat(np.eye(self.rank))
+                self.I_k = self.eta * np.asarray(np.eye(self.rank))
             self.n_restart = 0
             if self.callback_init:
                 self.final_obj = c_obj
@@ -287,8 +287,8 @@ class Snmf(nmf_std.Nmf_std):
             if self.n_restart >= 100:
                 raise utils.MFError(
                     "Too many restarts due to too large beta parameter.")
-            self.idx_w_old = np.mat(np.zeros((self.V.shape[0], 1)))
-            self.idx_h_old = np.mat(np.zeros((1, self.V.shape[1])))
+            self.idx_w_old = np.asarray(np.zeros((self.V.shape[0], 1)))
+            self.idx_h_old = np.asarray(np.zeros((1, self.V.shape[1])))
             self.inc = 0
             self.W, _ = self.seed.initialize(self.V, self.rank, self.options)
             # normalize W and convert to lil
@@ -333,7 +333,7 @@ class Snmf(nmf_std.Nmf_std):
         resmat1 = elop(self.W, WHHt - VHt + self.eta ** 2 * self.W, min)
         res_vec = nz_data(resmat) + nz_data(resmat1)
         # L1 norm
-        self.conv = norm(np.mat(res_vec), 1)
+        self.conv = norm(np.asarray(res_vec), 1)
         err_avg = self.conv / len(res_vec)
         self.idx_w_old = idx_w
         self.idx_h_old = idx_h
@@ -388,7 +388,7 @@ class Snmf(nmf_std.Nmf_std):
             # make infeasible solutions feasible (standard NNLS inner loop)
             if len(h_set) > 0:
                 n_h_set = len(h_set)
-                alpha = np.mat(np.zeros((l_var, n_h_set)))
+                alpha = np.asarray(np.zeros((l_var, n_h_set)))
                 while len(h_set) > 0 and iter < max_iter:
                     iter += 1
                     alpha[:, :n_h_set] = np.Inf
@@ -465,15 +465,15 @@ class Snmf(nmf_std.Nmf_std):
             # equivalent if CtC is square matrix
             for k in range(CtA.shape[1]):
                 ls = sp.linalg.gmres(CtC, CtA[:, k].toarray())[0]
-                K[:, k] = sp.lil_matrix(np.mat(ls).T)
+                K[:, k] = sp.lil_matrix(np.asarray(ls).T)
             # K = dot(np.linalg.pinv(CtC), CtA)
         else:
             l_var, p_rhs = p_set.shape
             coded_p_set = dot(
-                sp.lil_matrix(np.mat(2 ** np.array(list(range(l_var - 1, -1, -1))))), p_set)
+                sp.lil_matrix(np.asarray(2 ** np.array(list(range(l_var - 1, -1, -1))))), p_set)
             sorted_p_set, sorted_idx_set = sort(coded_p_set.todense())
-            breaks = diff(np.mat(sorted_p_set))
-            break_idx = [-1] + find(np.mat(breaks)) + [p_rhs]
+            breaks = diff(np.asarray(sorted_p_set))
+            break_idx = [-1] + find(np.asarray(breaks)) + [p_rhs]
             for k in range(len(break_idx) - 1):
                 cols2solve = sorted_idx_set[
                     break_idx[k] + 1: break_idx[k + 1] + 1]
@@ -483,7 +483,7 @@ class Snmf(nmf_std.Nmf_std):
                 sol = sp.lil_matrix(K.shape)
                 for k in range(tmp_ls.shape[1]):
                     ls = sp.linalg.gmres(CtC[:, vars][vars, :], tmp_ls[:, k].toarray())[0]
-                    sol[:, k] = sp.lil_matrix(np.mat(ls).T)
+                    sol[:, k] = sp.lil_matrix(np.asarray(ls).T)
                 i = 0
                 for c in cols2solve:
                     j = 0
@@ -519,7 +519,7 @@ class Snmf(nmf_std.Nmf_std):
         A = A.todense() if sp.isspmatrix(A) else A
         _, l_var = C.shape
         p_rhs = A.shape[1]
-        W = np.mat(np.zeros((l_var, p_rhs)))
+        W = np.asarray(np.zeros((l_var, p_rhs)))
         iter = 0
         max_iter = 3 * l_var
         # precompute parts of pseudoinverse
@@ -542,7 +542,7 @@ class Snmf(nmf_std.Nmf_std):
             # make infeasible solutions feasible (standard NNLS inner loop)
             if len(h_set) > 0:
                 n_h_set = len(h_set)
-                alpha = np.mat(np.zeros((l_var, n_h_set)))
+                alpha = np.asarray(np.zeros((l_var, n_h_set)))
                 while len(h_set) > 0 and iter < max_iter:
                     iter += 1
                     alpha[:, :n_h_set] = np.Inf
@@ -597,7 +597,7 @@ class Snmf(nmf_std.Nmf_std):
         Solve the set of equations CtA = CtC * K for variables defined in set p_set
         using the fast combinatorial approach (van Benthem and Keenan, 2004).
         """
-        K = np.mat(np.zeros(CtA.shape))
+        K = np.asarray(np.zeros(CtA.shape))
         if p_set is None or p_set.size == 0 or all(p_set):
             # equivalent if CtC is square matrix
             K = np.linalg.lstsq(CtC, CtA, rcond=-1)[0]
@@ -605,10 +605,10 @@ class Snmf(nmf_std.Nmf_std):
         else:
             l_var, p_rhs = p_set.shape
             coded_p_set = dot(
-                np.mat(2 ** np.array(list(range(l_var - 1, -1, -1)))), p_set)
+                np.asarray(2 ** np.array(list(range(l_var - 1, -1, -1)))), p_set)
             sorted_p_set, sorted_idx_set = sort(coded_p_set)
-            breaks = diff(np.mat(sorted_p_set))
-            break_idx = [-1] + find(np.mat(breaks)) + [p_rhs]
+            breaks = diff(np.asarray(sorted_p_set))
+            break_idx = [-1] + find(np.asarray(breaks)) + [p_rhs]
             for k in range(len(break_idx) - 1):
                 cols2solve = sorted_idx_set[
                     break_idx[k] + 1: break_idx[k + 1] + 1]

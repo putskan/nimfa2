@@ -188,8 +188,8 @@ class Psmf(nmf_std.Nmf_std):
                 self.H = self.V.__class__(
                     (self.rank, self.V.shape[1]), dtype='d')
             else:
-                self.W = np.mat(np.zeros((self.V.shape[0], self.rank)))
-                self.H = np.mat(np.zeros((self.rank, self.V.shape[1])))
+                self.W = np.asarray(np.zeros((self.V.shape[0], self.rank)))
+                self.H = np.asarray(np.zeros((self.rank, self.V.shape[1])))
             self.s = np.zeros((self.V.shape[0], self.N), int)
             self.r = np.zeros((self.V.shape[0], 1), int)
             self.psi = np.array(std(self.V, axis=1, ddof=0))

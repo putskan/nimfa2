@@ -187,10 +187,10 @@ class Bd(nmf_std.Nmf_std):
         nmf_std.Nmf_std.__init__(self, vars())
         if self.alpha is None:
             self.alpha = sp.csr_matrix((self.V.shape[0], self.rank))
-        self.alpha = self.alpha.tocsr() if sp.isspmatrix(self.alpha) else np.mat(self.alpha)
+        self.alpha = self.alpha.tocsr() if sp.isspmatrix(self.alpha) else np.asarray(self.alpha)
         if self.beta is None:
             self.beta = sp.csr_matrix((self.rank, self.V.shape[1]))
-        self.beta = self.beta.tocsr() if sp.isspmatrix(self.beta) else np.mat(self.beta)
+        self.beta = self.beta.tocsr() if sp.isspmatrix(self.beta) else np.asarray(self.beta)
         if self.n_w is None:
             self.n_w = np.zeros((self.rank, 1))
         if self.n_h is None:

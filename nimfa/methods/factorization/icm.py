@@ -162,10 +162,10 @@ class Icm(nmf_std.Nmf_std):
         nmf_std.Nmf_std.__init__(self, vars())
         if self.alpha is None:
             self.alpha = sp.rand(self.V.shape[0], self.rank, density=0.8, format='csr')
-        self.alpha= self.alpha.tocsr() if sp.isspmatrix(self.alpha) else np.mat(self.alpha)
+        self.alpha= self.alpha.tocsr() if sp.isspmatrix(self.alpha) else np.asarray(self.alpha)
         if self.beta is None:
             self.beta = sp.rand(self.rank, self.V.shape[1], density=0.8, format='csr')
-        self.beta = self.beta.tocsr() if sp.isspmatrix(self.beta) else np.mat(self.beta)
+        self.beta = self.beta.tocsr() if sp.isspmatrix(self.beta) else np.asarray(self.beta)
         self.tracker = mf_track.Mf_track() if self.track_factor and self.n_run > 1 \
                                               or self.track_error else None
 

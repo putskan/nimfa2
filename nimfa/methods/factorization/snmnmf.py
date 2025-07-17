@@ -192,10 +192,10 @@ class Snmnmf(nmf_mm.Nmf_mm):
         nmf_mm.Nmf_mm.__init__(self, vars())
         if self.A is None:
             self.A = sp.csr_matrix((self.V1.shape[1], self.V1.shape[1]))
-        self.A = self.A.tocsr() if sp.isspmatrix(self.A) else np.mat(self.A)
+        self.A = self.A.tocsr() if sp.isspmatrix(self.A) else np.asarray(self.A)
         if self.B is None:
             self.B = sp.csr_matrix((self.V.shape[1], self.V1.shape[1]))
-        self.B = self.B.tocsr() if sp.isspmatrix(self.B) else np.mat(self.B)
+        self.B = self.B.tocsr() if sp.isspmatrix(self.B) else np.asarray(self.B)
         self.tracker = mf_track.Mf_track() if self.track_factor and self.n_run > 1 \
                                               or self.track_error else None
 

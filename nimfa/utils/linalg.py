@@ -71,7 +71,7 @@ def trace(X):
     if sp.isspmatrix(X):
         return sum(X[i, i] for i in range(X.shape[0]))
     else:
-        return np.trace(np.mat(X))
+        return np.trace(np.asarray(X))
 
 
 def any(X, axis=None):
@@ -106,7 +106,7 @@ def any(X, axis=None):
                 check(now, row, col)
                 now += 1
         sol = [x != 0 for x in res]
-        return np.mat(sol) if axis == 0 else np.mat(sol).T
+        return np.asarray(sol) if axis == 0 else np.asarray(sol).T
     else:
         return X.any(axis)
 
@@ -144,7 +144,7 @@ def all(X, axis=None):
                 check(now, row, col)
                 now += 1
         sol = [x == X.shape[0] if axis == 0 else x == X.shape[1] for x in res]
-        return np.mat(sol) if axis == 0 else np.mat(sol).T
+        return np.asarray(sol) if axis == 0 else np.asarray(sol).T
     else:
         return X.all(axis)
 
@@ -228,9 +228,9 @@ def std(X, axis=None, ddof=0):
             no = X.shape[0] * X.shape[1]
             return sqrt(1. / (no - ddof) * sum((x - mean) ** 2 for x in X.data) + (no - len(X.data) * mean ** 2))
         if axis == 0:
-            return np.mat([np.std(X[:, i].toarray(), axis, ddof) for i in range(X.shape[1])])
+            return np.asarray([np.std(X[:, i].toarray(), axis, ddof) for i in range(X.shape[1])])
         if axis == 1:
-            return np.mat([np.std(X[i, :].toarray(), axis, ddof) for i in range(X.shape[0])]).T
+            return np.asarray([np.std(X[i, :].toarray(), axis, ddof) for i in range(X.shape[0])]).T
     else:
         return np.std(X, axis=axis, ddof=ddof)
 
@@ -272,10 +272,10 @@ def argmax(X, axis=None):
             return res
         elif axis == 0:
             t = list(zip(*res))
-            return list(t[0]), np.mat(t[1])
+            return list(t[0]), np.asarray(t[1])
         else:
             t = list(zip(*res))
-            return list(t[0]), np.mat(t[1]).T
+            return list(t[0]), np.asarray(t[1]).T
     else:
         idxX = np.asmatrix(X).argmax(axis)
         if axis is None:
@@ -326,10 +326,10 @@ def argmin(X, axis=None):
             return res
         elif axis == 0:
             t = list(zip(*res))
-            return list(t[0]), np.mat(t[1])
+            return list(t[0]), np.asarray(t[1])
         else:
             t = list(zip(*res))
-            return list(t[0]), np.mat(t[1]).T
+            return list(t[0]), np.asarray(t[1]).T
     else:
         idxX = np.asmatrix(X).argmin(axis)
         if axis is None:
@@ -389,8 +389,8 @@ def svd(X):
         else:
             U, S, V = _svd_right(X)
     else:
-        U, S, V = nla.svd(np.mat(X), full_matrices=False)
-        S = np.mat(np.diag(S))
+        U, S, V = nla.svd(np.asarray(X), full_matrices=False)
+        S = np.asarray(np.diag(S))
     return U, S, V
 
 
@@ -522,7 +522,7 @@ def multiply(X, Y):
     else:
         with warnings.catch_warnings():
             warnings.simplefilter('ignore')
-            return np.multiply(np.mat(X), np.mat(Y))
+            return np.multiply(np.asarray(X), np.asarray(Y))
 
 
 def power(X, s):
@@ -631,8 +631,8 @@ def elop(X, Y, op):
             X[X == 0] = np.finfo(X.dtype).eps
             Y[Y == 0] = np.finfo(Y.dtype).eps
         except ValueError:
-            return op(np.mat(X), np.mat(Y))
-        return op(np.mat(X), np.mat(Y))
+            return op(np.asarray(X), np.asarray(Y))
+        return op(np.asarray(X), np.asarray(Y))
 
 
 def _op_spmatrix(X, Y, op):
@@ -690,7 +690,7 @@ def _op_matrix(X, Y, op):
     # operation is not necessarily commutative
     assert X.shape == Y.shape, "Matrices are not aligned."
     eps = np.finfo(Y.dtype).eps if not 'int' in str(Y.dtype) else 0
-    return np.mat([[op(X[i, j], Y[i, j] + eps) for j in range(X.shape[1])] for i in range(X.shape[0])])
+    return np.asarray([[op(X[i, j], Y[i, j] + eps) for j in range(X.shape[1])] for i in range(X.shape[0])])
 
 
 def inf_norm(X):
@@ -742,7 +742,7 @@ def norm(X, p="fro"):
         }.get(p)
         return v(X) if v != None else sum(abs(x) ** p for x in X.data) ** (1. / p)
     else:
-        return nla.norm(np.mat(X), p)
+        return nla.norm(np.asarray(X), p)
 
 
 def vstack(X, format=None, dtype=None):

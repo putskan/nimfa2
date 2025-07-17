@@ -65,8 +65,8 @@ class Nndsvd(object):
         E = E.T
         if sp.isspmatrix(U):
             return self.init_sparse(V, U, S, E)
-        self.W = np.mat(np.zeros((V.shape[0], self.rank)))
-        self.H = np.mat(np.zeros((self.rank, V.shape[1])))
+        self.W = np.asarray(np.zeros((V.shape[0], self.rank)))
+        self.H = np.asarray(np.zeros((self.rank, V.shape[1])))
         # choose the first singular triplet to be nonnegative
         S = np.diagonal(S)
         self.W[:, 0] = sqrt(S[0]) * abs(U[:, 0])

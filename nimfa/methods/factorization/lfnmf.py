@@ -157,8 +157,8 @@ class Lfnmf(nmf_std.Nmf_std):
         for run in range(self.n_run):
             self.W, self.H = self.seed.initialize(
                 self.V, self.rank, self.options)
-            self.Sw, self.Sb = np.mat(
-                np.zeros((1, 1))), np.mat(np.zeros((1, 1)))
+            self.Sw, self.Sb = np.asarray(
+                np.zeros((1, 1))), np.asarray(np.zeros((1, 1)))
             p_obj = c_obj = sys.float_info.max
             best_obj = c_obj if run == 0 else best_obj
             iter = 0
@@ -244,7 +244,7 @@ class Lfnmf(nmf_std.Nmf_std):
         # update within class scatter and between class
         self.Sw = sum(sum(dot(self.H[:, c2m[i][j]] - avgs[i], (self.H[:, c2m[i][j]] - avgs[i]).T)
                           for j in range(len(c2m[i]))) for i in c2m)
-        avgs_t = np.mat(np.zeros((self.rank, 1)))
+        avgs_t = np.asarray(np.zeros((self.rank, 1)))
         for k in avgs:
             avgs_t += avgs[k]
         avgs_t /= len(avgs)
@@ -259,7 +259,7 @@ class Lfnmf(nmf_std.Nmf_std):
             c2m.setdefault(idxH[0, i], [])
             c2m[idxH[0, i]].append(i)
             # compute mean value of class idx in encoding matrix H
-            avgs.setdefault(idxH[0, i], np.mat(np.zeros((self.rank, 1))))
+            avgs.setdefault(idxH[0, i], np.asarray(np.zeros((self.rank, 1))))
             avgs[idxH[0, i]] += self.H[:, i]
         for k in avgs:
             avgs[k] /= len(c2m[k])

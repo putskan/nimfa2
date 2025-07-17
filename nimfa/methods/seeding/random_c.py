@@ -69,14 +69,14 @@ class Random_c(object):
             top_r = sorted(
                 enumerate([norm(V[i, :], 2) for i in range(V.shape[0])]), key=itemgetter(1), reverse=True)[:self.l_r]
         else:
-            self.W = np.mat(np.zeros((V.shape[0], self.rank)))
-            self.H = np.mat(np.zeros((self.rank, V.shape[1])))
+            self.W = np.asarray(np.zeros((V.shape[0], self.rank)))
+            self.H = np.asarray(np.zeros((self.rank, V.shape[1])))
             top_c = sorted(enumerate([norm(V[:, i], 2)
                            for i in range(V.shape[1])]), key=itemgetter(1), reverse=True)[:self.l_c]
             top_r = sorted(
                 enumerate([norm(V[i, :], 2) for i in range(V.shape[0])]), key=itemgetter(1), reverse=True)[:self.l_r]
-        top_c = np.mat(list(zip(*top_c))[0])
-        top_r = np.mat(list(zip(*top_r))[0])
+        top_c = np.asarray(list(zip(*top_c))[0])
+        top_r = np.asarray(list(zip(*top_r))[0])
         for i in range(self.rank):
             self.W[:, i] = V[
                 :, top_c[0, self.prng.randint(low=0, high=self.l_c, size=self.p_c)].tolist()[0]].mean(axis=1)

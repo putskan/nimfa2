@@ -153,13 +153,13 @@ def read():
     """
     print("Reading ORL faces database")
     dir = join(dirname(dirname(abspath(__file__))), 'datasets', 'ORL_faces', 's')
-    V = np.matrix(np.zeros((46 * 56, 400)))
+    V = np.asarray(np.zeros((46 * 56, 400)))
     for subject in range(40):
         for image in range(10):
             im = open(join(dir + str(subject + 1), str(image + 1) + ".pgm"))
             # reduce the size of the image
             im = im.resize((46, 56))
-            V[:, 10 * subject + image] = np.mat(np.asarray(im).flatten()).T
+            V[:, 10 * subject + image] = np.asarray(np.asarray(im).flatten()).T
     return V
 
 
@@ -174,9 +174,9 @@ def preprocess(V):
     """
     print("Data preprocessing")
     min_val = V.min(axis=0)
-    V = V - np.mat(np.ones((V.shape[0], 1))) * min_val
+    V = V - np.asarray(np.ones((V.shape[0], 1))) * min_val
     max_val = V.max(axis=0) + 1e-4
-    V = (255. * V) / (np.mat(np.ones((V.shape[0], 1))) * max_val) / 100.
+    V = (255. * V) / (np.asarray(np.ones((V.shape[0], 1))) * max_val) / 100.
     return V
 
 

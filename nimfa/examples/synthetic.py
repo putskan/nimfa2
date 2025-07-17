@@ -115,7 +115,7 @@ def run_bd(V):
     rank = 10
     bd = nimfa.Bd(V, seed="random_c", rank=rank, max_iter=12, alpha=np.zeros((V.shape[0], rank)),
                   beta=np.zeros((rank, V.shape[1])), theta=.0, k=.0, sigma=1., skip=100,
-                  stride=1, n_w=np.mat(np.zeros((rank, 1))), n_h=np.mat(np.zeros((rank, 1))),
+                  stride=1, n_w=np.asarray(np.zeros((rank, 1))), n_h=np.asarray(np.zeros((rank, 1))),
                   n_sigma=False)
     fit = bd()
     print_info(fit)
